@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "main": "dist/index.cjs.js",
   "types": "src/index.ts",
   "private": true,
@@ -30,7 +30,7 @@
     "@backstage/plugin-search-backend-node": "^0.4.5",
     "@backstage/plugin-techdocs-backend": "^0.13.3",
     "@gitbeaker/node": "^34.6.0",
-    "@ma11hewthomas/plugin-scaffolder-backend-module-snyk": "^0.1.1",
+    "@ma11hewthomas/plugin-scaffolder-backend-module-snyk": "^0.2.0",
     "@octokit/rest": "^18.5.3",
     "@vscode/sqlite3": "^5.0.7",
     "app": "link:../app",
