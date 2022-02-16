@@ -21,7 +21,8 @@
     "lint:all": "lerna run lint --",
     "prettier:check": "prettier --check .",
     "create-plugin": "backstage-cli create-plugin --scope internal",
-    "remove-plugin": "backstage-cli remove-plugin"
+    "remove-plugin": "backstage-cli remove-plugin",
+    "release": "changeset version && yarn diff --yes && yarn prettier --write '{packages,plugins}/*/{package.json,CHANGELOG.md}' && yarn install"
   },
   "workspaces": {
     "packages": [
@@ -46,5 +47,8 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.18.0"
   }
 }
