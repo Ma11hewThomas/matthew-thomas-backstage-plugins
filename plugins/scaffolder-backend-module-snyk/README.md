@@ -57,8 +57,8 @@ return await createRouter({
 ```
 
 ### Authorization
-To use this API, you must get your token from Snyk. It can be seen on https://snyk.io/account/ after you register with Snyk and login.
-Get your Snyk token (a service account with Viewer permission at your group level is preferred) and provide SNYK_TOKEN env var with the value "token <YOURTOKEN>"
+In order to use `plugin-scaffolder-backend-module-snyk`, you must provide an API token which it can use to access the Snyk API.
+Get your [Snyk API token](https://docs.snyk.io/features/integrations/managing-integrations/service-accounts) (Admin permission is required to import projects) and provide SNYK_TOKEN env var with the value "token <YOURTOKEN>"
 ```
 export SNYK_TOKEN="token 123-123-123-123"
 ```
