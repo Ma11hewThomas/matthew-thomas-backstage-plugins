@@ -1,8 +1,8 @@
 import {
-  createApiFactory,
-  createComponentExtension,
-  createPlugin,
-  createRouteRef,
+    createApiFactory,
+    createComponentExtension,
+    createPlugin,
+    createRouteRef, discoveryApiRef, identityApiRef,
 } from '@backstage/core-plugin-api';
 import { awsCodePipelineApiRef, AwsCodePipelineClient } from './api';
 import { Entity } from '@backstage/catalog-model';
@@ -16,11 +16,15 @@ export const entityContentRouteRef = createRouteRef({
 });
 
 export const awsCodePipelinePlugin = createPlugin({
-  id: 'aws-codepipeline',
-  apis: [createApiFactory(awsCodePipelineApiRef, new AwsCodePipelineClient())],
-  routes: {
-    entityContent: entityContentRouteRef,
-  },
+    id: 'aws-codepipeline',
+    apis: [
+        createApiFactory({
+            api: awsCodePipelineApiRef,
+            deps: { discoveryApi: discoveryApiRef, identityApi: identityApiRef },
+            factory: ({ discoveryApi, identityApi }) =>
+                new AwsCodePipelineClient({ discoveryApi, identityApi }),
+        }),
+    ],
 });
 
 export const EntityAWSCodePipelineOverviewCard = awsCodePipelinePlugin.provide(

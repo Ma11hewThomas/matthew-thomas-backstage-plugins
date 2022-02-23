@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 
 export const getDurationFromDates = (
-  startTime: Date,
-  lastUpdateTime: Date,
+    startTime: Date,
+    lastUpdateTime: Date,
 ): string => {
   const lastUpdate =
     lastUpdateTime?.toISOString() !== startTime.toISOString()

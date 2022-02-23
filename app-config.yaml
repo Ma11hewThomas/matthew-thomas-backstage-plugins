@@ -62,6 +62,10 @@ auth:
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
+awsCodePipeline:
+  accessKeyId: ${AWS_ACCESS_KEY_ID}
+  secretAccessKey: ${AWS_SECRET_ACCESS_KEY}
+
 catalog:
   import:
     entityFilename: catalog-info.yaml

@@ -42,7 +42,7 @@ export const OverviewComponent = ({
 }) => {
   const sinceExecution = codePipeline.latestExecution?.startTime
     ? DateTime.fromMillis(
-        codePipeline.latestExecution.startTime?.getTime() as number,
+        new Date(codePipeline.latestExecution.startTime).getTime() as number,
       ).toRelative()
     : 'Not yet run';
 
@@ -67,10 +67,7 @@ export const OverviewComponent = ({
               <Box aria-label="duration">
                 {codePipeline.latestExecution?.startTime !== undefined &&
                   codePipeline.latestExecution?.lastUpdateTime !== undefined &&
-                  getDurationFromDates(
-                    codePipeline.latestExecution?.startTime,
-                    codePipeline.latestExecution?.lastUpdateTime,
-                  )}
+                  getDurationFromDates(new Date(codePipeline.latestExecution?.startTime), new Date(codePipeline.latestExecution?.lastUpdateTime))}
               </Box>
             ),
             link: (

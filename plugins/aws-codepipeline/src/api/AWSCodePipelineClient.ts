@@ -1,76 +1,59 @@
-import { CodePipelineData, CodePipelineExecution } from '../types';
-import { AwsCodePipelineApi } from './AWSCodePipelineApi';
-import { CodePipeline } from '@aws-sdk/client-codepipeline';
+import { CodePipelineData } from '../types';
+import {AwsCodePipelineApi} from './AWSCodePipelineApi';
+import { DiscoveryApi, IdentityApi } from '@backstage/core-plugin-api';
+import { ResponseError } from '@backstage/errors';
 
-async function generateCredentials(
-  backendUrl: string,
-  options: {
-    token: string | undefined;
-  },
-) {
-  const respData = await fetch(`${backendUrl}/api/aws/credentials`, {
-    headers: {
-      // Disable eqeqeq rule for next line to allow it to pick up both undefined and null
-      // eslint-disable-next-line eqeqeq
-      ...((options == null ? void 0 : options.token) && {
-        // eslint-disable-next-line eqeqeq
-        Authorization: `Bearer ${options == null ? void 0 : options.token}`,
-      }),
-    },
-  });
-  try {
-    const resp = await respData.json();
-    return {
-      accessKeyId: resp.AccessKeyId,
-      secretAccessKey: resp.SecretAccessKey,
-      sessionToken: resp.SessionToken,
-    };
-  } catch (e: any) {
-    throw new Error('MissingBackendAwsAuthException');
-  }
-}
 export class AwsCodePipelineClient implements AwsCodePipelineApi {
-  async listPipelineExecutions({
-    awsRegion,
-    backendUrl,
-    pipelineName,
-    token,
-  }: {
-    awsRegion: string;
-    backendUrl: string;
-    pipelineName: string;
-    token?: string;
-  }): Promise<CodePipelineData> {
-    const credentials = await generateCredentials(backendUrl, { token });
-    const codePipelineApi = new CodePipeline({
-      region: awsRegion,
-      credentials: {
-        accessKeyId: credentials.accessKeyId,
-        secretAccessKey: credentials.secretAccessKey,
-        sessionToken: credentials.sessionToken,
-      },
-    });
-    const resp = await codePipelineApi.listPipelineExecutions({
-      pipelineName: pipelineName,
-    });
+    private readonly discoveryApi: DiscoveryApi;
+    private readonly identityApi: IdentityApi;
 
-    const executions: Array<CodePipelineExecution> | undefined =
-      resp.pipelineExecutionSummaries?.map(execution => ({
-        ...execution,
-        pipelineExecutionId: execution.pipelineExecutionId?.substring(0, 8),
-        executionHref: `https://${awsRegion}.console.aws.amazon.com/codesuite/codepipeline/pipelines/${pipelineName}/executions/${execution.pipelineExecutionId}/timeline?region=${awsRegion}`,
-      }));
+    constructor(options: {
+        discoveryApi: DiscoveryApi;
+        identityApi: IdentityApi;
+    }) {
+        this.discoveryApi = options.discoveryApi;
+        this.identityApi = options.identityApi;
+    }
 
-    return {
-      region: awsRegion,
-      name: pipelineName,
-      pipelineHref: `https://${awsRegion}.console.aws.amazon.com/codesuite/codepipeline/pipelines/${pipelineName}?region=${awsRegion}`,
-      executions: executions,
-      latestExecution:
-        resp.pipelineExecutionSummaries !== undefined &&
-        resp.pipelineExecutionSummaries.length > 0
-          ? resp.pipelineExecutionSummaries[0]
-          : undefined,
-    };
-  }
+    public async listPipelineExecutions({
+        awsRegion,
+        pipelineName}: {
+        awsRegion: string;
+        pipelineName: string;
+    }
+    ): Promise<CodePipelineData> {
+
+        const urlSegment = `pipeline-executions/${encodeURIComponent(awsRegion)}/${encodeURIComponent(
+            pipelineName
+        )}/`;
+
+        let codePipelineData = await this.get<CodePipelineData>(urlSegment);
+
+        codePipelineData = {...codePipelineData, executions: codePipelineData.executions?.map(execution => ({
+                ...execution,
+                // @ts-ignore
+                startTime: new Date(execution.startTime),
+                // @ts-ignore
+                lastUpdateTime: new Date(execution.lastUpdateTime),
+
+        }))};
+        return  codePipelineData ;
+    }
+
+    private async get<T>(path: string): Promise<T> {
+        const baseUrl = `${await this.discoveryApi.getBaseUrl('aws-codepipeline')}/`;
+        const url = new URL(path, baseUrl);
+
+        const credentialsToken = await this.identityApi.getCredentials();
+        const response = await fetch(url.toString(), {
+            headers: credentialsToken ? { Authorization: `Bearer ${credentialsToken}` } : {},
+        });
+
+        if (!response.ok) {
+            throw await ResponseError.fromResponse(response);
+        }
+
+        return await response.json() as Promise<T>;
+    }
 }
+
