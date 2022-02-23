@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sample-service
+  description: |
+    A service for testing Backstage functionality. Configured for AWS CodePipeline
+  annotations:
+    aws.com/code-pipeline-name: automation-k6-performance
+    aws.com/code-pipeline-region: eu-west-2
+spec:
+  type: service
+  owner: matthewthomas
+  lifecycle: experimental
+  providesApis:
+    - sample-service

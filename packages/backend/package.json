@@ -32,6 +32,7 @@
     "@gitbeaker/node": "^34.6.0",
     "@ma11hewthomas/plugin-scaffolder-backend-module-snyk": "^0.2.0",
     "@octokit/rest": "^18.5.3",
+    "@roadiehq/backstage-plugin-aws-auth": "^0.3.4",
     "@vscode/sqlite3": "^5.0.7",
     "app": "link:../app",
     "dockerode": "^3.3.1",
