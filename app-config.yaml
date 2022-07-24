@@ -112,6 +112,8 @@ catalog:
         - allow: [Template]
     - type: file
       target: ../../snyk-template.yaml
+      rules:
+        - allow: [Template]
     # File used for testing purposes
     - type: file
       target: ../entities/test-entity.yaml

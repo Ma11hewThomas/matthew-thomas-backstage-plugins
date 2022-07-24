@@ -1,0 +1,20 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: projen-template
+  title: projen-template
+  description: Template for projen
+  tags:
+    - debug
+spec:
+  owner: MatthewThomas
+  type: debug
+  steps:
+    - id: projen
+      name: Projen new
+      action: projen:new
+      input:
+        template: '@ma11hewthomas/aws-ecs-fargate-service-projen-template'
+        external: true
+        post: true
+        targetPath: ./${{ parameters.component_id }}
