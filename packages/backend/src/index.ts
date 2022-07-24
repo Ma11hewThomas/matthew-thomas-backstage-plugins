@@ -80,7 +80,6 @@ async function main() {
   const techdocsEnv = useHotMemoize(module, () => createEnv('techdocs'));
   const searchEnv = useHotMemoize(module, () => createEnv('search'));
   const appEnv = useHotMemoize(module, () => createEnv('app'));
-  const awsEnv = useHotMemoize(module, () => createEnv('aws'));
   const awsCodePipelineEnv = useHotMemoize(module, () => createEnv('aws-codepipeline'));
 
 

@@ -32,7 +32,6 @@ import { SidebarSearchModal } from '@backstage/plugin-search';
 import {
   Sidebar,
   sidebarConfig,
-  SidebarContext,
   SidebarDivider,
   SidebarGroup,
   SidebarItem,
