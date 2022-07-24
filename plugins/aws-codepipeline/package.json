@@ -13,7 +13,8 @@
     "type": "git",
     "url": "github:ma11hewthomas/matthew-thomas-backstage-plugins",
     "directory": "plugins/aws-codepipeline"
-  },  "backstage": {
+  },
+  "backstage": {
     "role": "frontend-plugin"
   },
   "scripts": {
