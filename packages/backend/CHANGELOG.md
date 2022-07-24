@@ -1,5 +1,16 @@
 # backend
 
+## 1.0.1
+
+### Patch Changes
+
+- 244a034: Backstage upgrade
+- Updated dependencies [244a034]
+  - app@1.0.1
+  - @ma11hewthomas/backstage-plugin-aws-codepipeline-backend@1.0.1
+  - @ma11hewthomas/plugin-scaffolder-backend-module-projen@2.0.1
+  - @ma11hewthomas/plugin-scaffolder-backend-module-snyk@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

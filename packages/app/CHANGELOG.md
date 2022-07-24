@@ -1,5 +1,13 @@
 # app
 
+## 1.0.1
+
+### Patch Changes
+
+- 244a034: Backstage upgrade
+- Updated dependencies [244a034]
+  - @ma11hewthomas/backstage-plugin-aws-codepipeline@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

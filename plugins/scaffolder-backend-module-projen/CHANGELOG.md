@@ -1,5 +1,11 @@
 # @ma11hewthomas/plugin-scaffolder-backend-module-projen
 
+## 2.0.1
+
+### Patch Changes
+
+- 244a034: Backstage upgrade
+
 ## 2.0.0
 
 ### Major Changes
