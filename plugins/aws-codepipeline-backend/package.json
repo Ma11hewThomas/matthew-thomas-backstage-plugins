@@ -14,6 +14,9 @@
     "url": "github:ma11hewthomas/matthew-thomas-backstage-plugins",
     "directory": "plugins/aws-codepipeline-backend"
   },
+  "backstage": {
+    "role": "backend-plugin"
+  },
   "scripts": {
     "start": "backstage-cli package start",
     "build": "backstage-cli package build",
