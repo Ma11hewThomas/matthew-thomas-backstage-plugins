@@ -29,31 +29,36 @@ Configure the action:
 
 ```typescript
 // packages/backend/src/plugins/scaffolder.ts
-
-import { snykImportProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-snyk';
+---
 import { ScmIntegrations } from '@backstage/integration';
+import { snykImportProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-snyk';
 
-const integrations = ScmIntegrations.fromConfig(config);
+export default async function createPlugin(
+  env: PluginEnvironment,
+): Promise<Router> {
+  const catalogClient = new CatalogClient({
+    discoveryApi: env.discovery,
+  });
+  const integrations = ScmIntegrations.fromConfig(env.config);
 
-const builtInActions = createBuiltinActions({
-containerRunner,
-integrations,
-config,
-catalogClient,
-reader,
-});
+  const builtInActions = createBuiltinActions({
+    integrations, 
+    catalogClient,
+    config: env.config,
+    reader: env.reader,
+  });
 
-const actions = [...builtInActions, snykImportProjectAction()];
+  const actions = [...builtInActions, snykImportProjectAction()];
 
-return await createRouter({
-  containerRunner,
-  logger,
-  config,
-  database,
-  catalogClient,
-  reader,
-  actions,
-});
+  return await createRouter({
+    actions,
+    logger: env.logger,
+    config: env.config,
+    database: env.database,
+    reader: env.reader,
+    catalogClient,
+  });
+}
 ```
 
 ### Authorization

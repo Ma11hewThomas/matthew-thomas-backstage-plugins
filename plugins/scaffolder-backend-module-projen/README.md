@@ -27,31 +27,36 @@ Configure the action:
 
 ```typescript
 // packages/backend/src/plugins/scaffolder.ts
-
-import { projenNewAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-projen';
+---
 import { ScmIntegrations } from '@backstage/integration';
+import { projenNewAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-projen';
 
-const integrations = ScmIntegrations.fromConfig(config);
+export default async function createPlugin(
+  env: PluginEnvironment,
+): Promise<Router> {
+  const catalogClient = new CatalogClient({
+    discoveryApi: env.discovery,
+  });
+  const integrations = ScmIntegrations.fromConfig(env.config);
 
-const builtInActions = createBuiltinActions({
-containerRunner,
-integrations,
-config,
-catalogClient,
-reader,
-});
+  const builtInActions = createBuiltinActions({
+    integrations, 
+    catalogClient,
+    config: env.config,
+    reader: env.reader,
+  });
 
-const actions = [...builtInActions, projenNewAction()];
+  const actions = [...builtInActions, projenNewAction()];
 
-return await createRouter({
-  containerRunner,
-  logger,
-  config,
-  database,
-  catalogClient,
-  reader,
-  actions,
-});
+  return await createRouter({
+    actions,
+    logger: env.logger,
+    config: env.config,
+    database: env.database,
+    reader: env.reader,
+    catalogClient,
+  });
+}
 ```
 
 ## Example of using

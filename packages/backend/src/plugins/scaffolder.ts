@@ -1,45 +1,35 @@
-import { DockerContainerRunner } from '@backstage/backend-common';
 import { CatalogClient } from '@backstage/catalog-client';
-import {
-  createBuiltinActions,
-  createRouter,
-} from '@backstage/plugin-scaffolder-backend';
-import Docker from 'dockerode';
+import { createRouter } from '@backstage/plugin-scaffolder-backend';
 import { Router } from 'express';
 import type { PluginEnvironment } from '../types';
+import { createBuiltinActions } from '@backstage/plugin-scaffolder-backend';
+import { ScmIntegrations } from '@backstage/integration';
 import { snykImportProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-snyk';
 import { projenNewAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-projen';
-import { ScmIntegrations } from '@backstage/integration';
 
-export default async function createPlugin({
-  logger,
-  config,
-  database,
-  reader,
-  discovery,
-}: PluginEnvironment): Promise<Router> {
-  const dockerClient = new Docker();
-  const containerRunner = new DockerContainerRunner({ dockerClient });
-  const catalogClient = new CatalogClient({ discoveryApi: discovery });
-  const integrations = ScmIntegrations.fromConfig(config);
+export default async function createPlugin(
+  env: PluginEnvironment,
+): Promise<Router> {
+  const catalogClient = new CatalogClient({
+    discoveryApi: env.discovery,
+  });
+  const integrations = ScmIntegrations.fromConfig(env.config);
 
   const builtInActions = createBuiltinActions({
-    containerRunner,
-    integrations,
-    config,
+    integrations, 
     catalogClient,
-    reader,
+    config: env.config,
+    reader: env.reader,
   });
 
   const actions = [...builtInActions, snykImportProjectAction(), projenNewAction()];
 
   return await createRouter({
-    containerRunner,
-    logger,
-    config,
-    database,
-    catalogClient,
-    reader,
     actions,
+    logger: env.logger,
+    config: env.config,
+    database: env.database,
+    reader: env.reader,
+    catalogClient,
   });
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useContext, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Link, makeStyles } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import ExtensionIcon from '@material-ui/icons/Extension';
@@ -28,10 +28,7 @@ import {
   Settings as SidebarSettings,
   UserSettingsSignInAvatar,
 } from '@backstage/plugin-user-settings';
-import {
-  SidebarSearchModal,
-  SearchContextProvider,
-} from '@backstage/plugin-search';
+import { SidebarSearchModal } from '@backstage/plugin-search';
 import {
   Sidebar,
   sidebarConfig,
@@ -42,6 +39,7 @@ import {
   SidebarPage,
   SidebarScrollWrapper,
   SidebarSpace,
+  useSidebarOpenState,
 } from '@backstage/core-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -63,7 +61,7 @@ const useSidebarLogoStyles = makeStyles({
 
 const SidebarLogo = () => {
   const classes = useSidebarLogoStyles();
-  const { isOpen } = useContext(SidebarContext);
+  const { isOpen } = useSidebarOpenState();
 
   return (
     <div className={classes.root}>
@@ -72,6 +70,7 @@ const SidebarLogo = () => {
         to="/"
         underline="none"
         className={classes.link}
+        aria-label="Home"
       >
         {isOpen ? <LogoFull /> : <LogoIcon />}
       </Link>
@@ -84,9 +83,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
     <Sidebar>
       <SidebarLogo />
       <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
-        <SearchContextProvider>
-          <SidebarSearchModal />
-        </SearchContextProvider>{' '}
+      <SidebarSearchModal />
       </SidebarGroup>
       <SidebarDivider />
       <SidebarGroup label="Menu" icon={<MenuIcon />}>

@@ -30,7 +30,6 @@ import techdocs from './plugins/techdocs';
 import search from './plugins/search';
 import { PluginEnvironment } from './types';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
-import aws from './plugins/aws';
 import awsCodePipeline from './plugins/aws-codepipeline';
 
 function makeCreateEnv(config: Config) {
@@ -92,7 +91,6 @@ async function main() {
   apiRouter.use('/techdocs', await techdocs(techdocsEnv));
   apiRouter.use('/proxy', await proxy(proxyEnv));
   apiRouter.use('/search', await search(searchEnv));
-  apiRouter.use('/aws', await aws(awsEnv));
   apiRouter.use('/aws-codepipeline', await awsCodePipeline(awsCodePipelineEnv));
 
   // Add backends ABOVE this line; this 404 handler is the catch-all fallback
