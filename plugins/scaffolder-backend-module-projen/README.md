@@ -54,7 +54,7 @@ return await createRouter({
 });
 ```
 
-### Example of using
+## Example of using
 
 ```yaml
 ---
@@ -81,4 +81,20 @@ spec:
 ```
 This action is typically used before the publish action, but can be used on its own.
 
+## Available parameters
+
+The following optonal parameters are available to use:
+### external
+Projen provide built in templates for many projects. If you are using a custom template, set this to true to use the external projen command --from. Default is false.
+
+### post
+Run post-synthesis steps such as installing dependencies. Default is true.
+
+### targetPath
+Target path within the working directory to generate contents to. Defaults to the working directory root. Projen uses the the targetPath when scaffolding to generate the project name.
+
+### args
+Additional arguments to pass to the command, see projen documentation for more information 
+
+### More information
 You can visit the `/create/actions` route in your Backstage application to find out more about the parameters this action accepts when it's installed to configure how you like.
