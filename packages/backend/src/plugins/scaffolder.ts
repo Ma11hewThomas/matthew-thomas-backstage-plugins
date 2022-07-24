@@ -8,6 +8,7 @@ import Docker from 'dockerode';
 import { Router } from 'express';
 import type { PluginEnvironment } from '../types';
 import { snykImportProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-snyk';
+import { projenNewAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-projen';
 import { ScmIntegrations } from '@backstage/integration';
 
 export default async function createPlugin({
@@ -30,7 +31,7 @@ export default async function createPlugin({
     reader,
   });
 
-  const actions = [...builtInActions, snykImportProjectAction()];
+  const actions = [...builtInActions, snykImportProjectAction(), projenNewAction()];
 
   return await createRouter({
     containerRunner,

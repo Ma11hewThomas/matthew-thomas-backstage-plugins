@@ -32,6 +32,7 @@
     "@backstage/plugin-techdocs-backend": "^0.13.3",
     "@ma11hewthomas/backstage-plugin-aws-codepipeline-backend": "^0.0.1",
     "@ma11hewthomas/plugin-scaffolder-backend-module-snyk": "^0.2.0",
+    "@ma11hewthomas/plugin-scaffolder-backend-module-projen": "^0.0.1",
     "@octokit/rest": "^18.5.3",
     "@roadiehq/backstage-plugin-aws-auth": "^0.3.4",
     "@vscode/sqlite3": "^5.0.7",
