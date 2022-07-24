@@ -1,5 +1,19 @@
 # backend
 
+## 1.0.0
+
+### Major Changes
+
+- 905709b: Backstage upgrade
+
+### Patch Changes
+
+- Updated dependencies [905709b]
+  - app@1.0.0
+  - @ma11hewthomas/backstage-plugin-aws-codepipeline-backend@1.0.0
+  - @ma11hewthomas/plugin-scaffolder-backend-module-projen@2.0.0
+  - @ma11hewthomas/plugin-scaffolder-backend-module-snyk@1.0.0
+
 ## 0.2.1
 
 ### Patch Changes

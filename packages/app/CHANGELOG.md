@@ -1,5 +1,16 @@
 # app
 
+## 1.0.0
+
+### Major Changes
+
+- 905709b: Backstage upgrade
+
+### Patch Changes
+
+- Updated dependencies [905709b]
+  - @ma11hewthomas/backstage-plugin-aws-codepipeline@1.0.0
+
 ## 0.2.1
 
 ### Patch Changes
