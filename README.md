@@ -7,6 +7,9 @@ The following plugins can be found in this repo:
 
 - [Projen new scaffolder action](https://www.npmjs.com/package/@ma11hewthomas/plugin-scaffolder-backend-module-projen)
 
+## Release
+- yarn changeset
+- yarn release
 
 ## License
 
