@@ -1,5 +1,11 @@
 # @ma11hewthomas/plugin-scaffolder-backend-module-projen
 
+## 2.0.2
+
+### Patch Changes
+
+- 352efe1: upgrade bakstage version 1.11.0-next.2
+
 ## 2.0.1
 
 ### Patch Changes
