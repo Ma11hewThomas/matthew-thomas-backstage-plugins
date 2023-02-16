@@ -15,9 +15,9 @@
  */
 
 import {
-  createTemplateAction,
   executeShellCommand,
 } from '@backstage/plugin-scaffolder-backend';
+import { createTemplateAction } from '@backstage/plugin-scaffolder-node';
 import { resolveSafeChildPath } from '@backstage/backend-common';
 
 export const projenNewAction = () => {
