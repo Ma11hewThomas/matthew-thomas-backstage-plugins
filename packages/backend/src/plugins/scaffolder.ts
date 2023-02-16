@@ -6,6 +6,8 @@ import { createBuiltinActions } from '@backstage/plugin-scaffolder-backend';
 import { ScmIntegrations } from '@backstage/integration';
 import { snykImportProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-snyk';
 import { projenNewAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-projen';
+import { sonarQubeCreateProjectAction } from '../../../../plugins/scaffolder-backend-module-sonarqube';
+
 
 export default async function createPlugin(
   env: PluginEnvironment,
@@ -22,7 +24,9 @@ export default async function createPlugin(
     reader: env.reader,
   });
 
-  const actions = [...builtInActions, snykImportProjectAction(), projenNewAction()];
+  const actions = [...builtInActions, snykImportProjectAction(), projenNewAction(), sonarQubeCreateProjectAction({
+    config: env.config,
+  }),];
 
   return await createRouter({
     actions,

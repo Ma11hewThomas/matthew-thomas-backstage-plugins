@@ -68,6 +68,8 @@ auth:
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
+   sonarqube:
+    token: ${SONARQUBE_TOKEN}
 
 awsCodePipeline:
   accessKeyId: ${AWS_ACCESS_KEY_ID}
@@ -107,6 +109,10 @@ catalog:
         - allow: [User, Group]
     - type: file
       target: ../../snyk-template.yaml
+      rules:
+        - allow: [Template]
+    - type: file
+      target: ../../sonar-template.yaml
       rules:
         - allow: [Template]
     - type: file
