@@ -6,7 +6,7 @@ import { createBuiltinActions } from '@backstage/plugin-scaffolder-backend';
 import { ScmIntegrations } from '@backstage/integration';
 import { snykImportProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-snyk';
 import { projenNewAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-projen';
-import { sonarQubeCreateProjectAction } from '../../../../plugins/scaffolder-backend-module-sonarqube';
+import { sonarQubeCreateProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-sonarqube';
 
 
 export default async function createPlugin(
@@ -15,26 +15,33 @@ export default async function createPlugin(
   const catalogClient = new CatalogClient({
     discoveryApi: env.discovery,
   });
+
   const integrations = ScmIntegrations.fromConfig(env.config);
 
   const builtInActions = createBuiltinActions({
-    integrations, 
+    integrations,
     catalogClient,
     config: env.config,
     reader: env.reader,
   });
 
-  const actions = [...builtInActions, snykImportProjectAction(), projenNewAction(), sonarQubeCreateProjectAction({
-    config: env.config,
-  }),];
+  const actions = [
+    ...builtInActions,
+    projenNewAction(),
+    projenNewAction(),
+    sonarQubeCreateProjectAction({
+      config: env.config,
+    }),
+  ];
 
   return await createRouter({
-    actions,
     logger: env.logger,
     config: env.config,
     database: env.database,
+    catalogClient: catalogClient,
     reader: env.reader,
-    catalogClient,
     identity: env.identity,
+    actions,
+    scheduler: env.scheduler,
   });
 }

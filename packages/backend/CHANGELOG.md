@@ -1,5 +1,12 @@
 # backend
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @ma11hewthomas/plugin-scaffolder-backend-module-sonarqube@0.0.5
+
 ## 1.0.2
 
 ### Patch Changes

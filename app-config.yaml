@@ -68,7 +68,7 @@ auth:
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
-   sonarqube:
+  sonarqube:
     token: ${SONARQUBE_TOKEN}
 
 awsCodePipeline:

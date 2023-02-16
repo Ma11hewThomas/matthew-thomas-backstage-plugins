@@ -10,7 +10,7 @@ The `sonarqube:project:create` action creates a new project in Sonar. Both Sonar
 
 ```
 cd packages/backend
-yarn add @backstage/scaffolder-backend-module-sonarqube
+yarn add @ma11hewthomas/scaffolder-backend-module-sonarqube
 ```
 
 Configure the action:
@@ -20,7 +20,7 @@ Configure the action:
 // packages/backend/src/plugins/scaffolder.ts
 ---
 import { ScmIntegrations } from '@backstage/integration';
-import { sonarQubeCreateProjectAction } from '@backstage/plugin-scaffolder-backend-module-sonarqube';
+import { sonarQubeCreateProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-sonarqube';
 
 export default async function createPlugin(
   env: PluginEnvironment,
@@ -28,7 +28,7 @@ export default async function createPlugin(
   const catalogClient = new CatalogClient({
     discoveryApi: env.discovery,
   });
-}
+
   const integrations = ScmIntegrations.fromConfig(env.config);
 
   const builtInActions = createBuiltinActions({
@@ -55,7 +55,7 @@ export default async function createPlugin(
     actions,
     scheduler: env.scheduler,
   });
-
+}
 ```
 
 ### Authorization
