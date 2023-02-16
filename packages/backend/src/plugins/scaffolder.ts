@@ -28,7 +28,7 @@ export default async function createPlugin(
   const actions = [
     ...builtInActions,
     projenNewAction(),
-    projenNewAction(),
+    snykImportProjectAction(),
     sonarQubeCreateProjectAction({
       config: env.config,
     }),
