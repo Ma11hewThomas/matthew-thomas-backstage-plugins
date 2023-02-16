@@ -18,7 +18,7 @@ import { getDurationFromDates } from './getDurationFromDates';
 
 describe('getDurationFromDates', () => {
   beforeAll(() => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(new Date('2022-02-22T09:00:00.0000000Z'));
   });
 
@@ -33,7 +33,7 @@ describe('getDurationFromDates', () => {
 
       const result = getDurationFromDates(startTime, lastUpdateTime);
 
-      expect(result).toEqual('90 min');
+      expect(result).toEqual('90 mins');
     });
   });
 
@@ -43,7 +43,7 @@ describe('getDurationFromDates', () => {
       const lastUpdateTime = new Date('2022-02-22T08:58:00.0000000Z');
       const result = getDurationFromDates(startTime, lastUpdateTime);
 
-      expect(result).toEqual('2 min');
+      expect(result).toEqual('2 mins');
     });
   });
 });
