@@ -7,6 +7,8 @@ The following plugins can be found in this repo:
 
 - [Projen new scaffolder action](https://www.npmjs.com/package/@ma11hewthomas/plugin-scaffolder-backend-module-projen)
 
+- [SonarQube create project scaffolder action](https://www.npmjs.com/package/@ma11hewthomas/plugin-scaffolder-backend-module-sonarqube)
+
 ## Release
 - yarn changeset
 - yarn release
