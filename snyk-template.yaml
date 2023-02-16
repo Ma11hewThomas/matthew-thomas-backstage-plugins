@@ -1,8 +1,8 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: debug
-  title: debug
+  name: debug-snyk
+  title: debug-snyk
   description: Template for debugging
   tags:
     - debug

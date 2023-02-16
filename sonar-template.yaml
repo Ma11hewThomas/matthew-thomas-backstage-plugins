@@ -1,0 +1,20 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: debug-sonar
+  title: debug-sonar
+  description: Template for debugging
+  tags:
+    - debug
+spec:
+  owner: MatthewThomas
+  type: debug
+  steps:
+    - id: sonarqube
+      name: sonar import projects
+      action: sonarqube:project:create
+      input:
+        name: test-project-one
+        projectKey: test-project-one
+        organization: your-org-id
+    
