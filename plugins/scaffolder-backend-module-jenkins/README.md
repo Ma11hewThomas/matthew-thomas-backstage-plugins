@@ -10,7 +10,7 @@ The `jenkins:job:create` action creates a new job in Jenkins.
 
 ```
 cd packages/backend
-yarn add @ma11hewthomas/scaffolder-backend-module-jenkins
+yarn add @ma11hewthomas/plugin-scaffolder-backend-module-jenkins
 ```
 
 Configure the action:

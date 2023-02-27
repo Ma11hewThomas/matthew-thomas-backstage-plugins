@@ -1,5 +1,11 @@
 # @ma11hewthomas/plugin-scaffolder-backend-module-sonarqube
 
+## 0.0.7
+
+### Patch Changes
+
+- docs amend usage instructions
+
 ## 0.0.6
 
 ### Patch Changes

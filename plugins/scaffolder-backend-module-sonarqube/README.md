@@ -10,7 +10,7 @@ The `sonarqube:project:create` action creates a new project in Sonar. Both Sonar
 
 ```
 cd packages/backend
-yarn add @ma11hewthomas/scaffolder-backend-module-sonarqube
+yarn add @ma11hewthomas/plugin-scaffolder-backend-module-sonarqube
 ```
 
 Configure the action:
