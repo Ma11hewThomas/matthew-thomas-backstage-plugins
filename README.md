@@ -9,6 +9,9 @@ The following plugins can be found in this repo:
 
 - [SonarQube create project scaffolder action](https://www.npmjs.com/package/@ma11hewthomas/plugin-scaffolder-backend-module-sonarqube)
 
+- [Jenkins create job scaffolder action](https://www.npmjs.com/package/@ma11hewthomas/plugin-scaffolder-backend-module-jenkins)
+
+
 ## Release
 - yarn changeset
 - yarn release
