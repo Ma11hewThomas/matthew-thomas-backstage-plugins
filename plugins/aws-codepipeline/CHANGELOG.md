@@ -1,5 +1,11 @@
 # @ma11hewthomas/backstage-plugin-aws-codepipeline
 
+## 2.0.0
+
+### Major Changes
+
+- package is deprecated
+
 ## 1.0.2
 
 ### Patch Changes
