@@ -1,0 +1,19 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: debug-jenkins
+  title: debug-jenkins
+  description: Template for debugging
+  tags:
+    - debug
+spec:
+  owner: MatthewThomas
+  type: debug
+  steps:
+    - id: template
+      name: Jenkins create job
+      action: jenkins:job:create
+      input:
+        configPath: /path/to/config.xml
+        jobName: test-project-one
+        folderName: test-folder
