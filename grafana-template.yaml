@@ -1,0 +1,21 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: debug-grafana
+  title: debug-grafana
+  description: Template for debugging
+  tags:
+    - debug
+spec:
+  owner: MatthewThomas
+  type: debug
+  steps:
+    - id: grafana
+      name: Grafana create dashboard
+      action: grafana:dashboard:create
+      input:
+        dashboardModelPath: path/to/grafana/dashboard.json
+  output:
+    links:
+      - title: Grafana Dashboard
+        url: ${{ steps.grafana.output.dashboardUrl }}
