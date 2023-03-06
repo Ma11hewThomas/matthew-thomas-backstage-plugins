@@ -7,7 +7,7 @@ import { ScmIntegrations } from '@backstage/integration';
 import { snykImportProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-snyk';
 import { projenNewAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-projen';
 import { sonarQubeCreateProjectAction } from '@ma11hewthomas/plugin-scaffolder-backend-module-sonarqube';
-
+import { grafanaCreateDashboardAction } from '../../../../plugins/scaffolder-backend-module-grafana/src/actions';
 
 export default async function createPlugin(
   env: PluginEnvironment,
@@ -30,6 +30,9 @@ export default async function createPlugin(
     projenNewAction(),
     snykImportProjectAction(),
     sonarQubeCreateProjectAction({
+      config: env.config,
+    }),
+    grafanaCreateDashboardAction({
       config: env.config,
     }),
   ];

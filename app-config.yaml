@@ -74,6 +74,9 @@ scaffolder:
     username: ${JENKINS_USERNAME}
     key: ${JENKINS_API_KEY}
     server: ${JENKINS_SERVER_URL}
+  grafana:
+    key: ${GRAFANA_API_KEY}
+    server: ${GRAFANA_SERVER_URL}
 
 awsCodePipeline:
   accessKeyId: ${AWS_ACCESS_KEY_ID}
@@ -125,6 +128,10 @@ catalog:
         - allow: [Template]
     - type: file
       target: ../../projen-template.yaml
+      rules:
+        - allow: [Template]
+    - type: file
+      target: ../../grafana-template.yaml
       rules:
         - allow: [Template]
     # File used for testing purposes
