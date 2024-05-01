@@ -1,5 +1,11 @@
 # @ma11hewthomas/plugin-scaffolder-backend-module-jenkins
 
+## 0.2.5
+
+### Patch Changes
+
+- add safe path resolve
+
 ## 0.2.4
 
 ### Patch Changes
