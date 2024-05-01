@@ -19,6 +19,7 @@ import { createTemplateAction } from '@backstage/plugin-scaffolder-node';
 import { InputError } from '@backstage/errors';
 import fetch from 'cross-fetch';
 import { readFileSync } from 'fs';
+import { resolveSafeChildPath } from '@backstage/backend-common';
 
 export const jenkinsCreateJobAction = (options: { config: Config }) => {
   const { config } = options;
@@ -58,6 +59,7 @@ export const jenkinsCreateJobAction = (options: { config: Config }) => {
 
     async handler(ctx) {
       const { configPath, jobName, folderName, serverUrl } = ctx.input;
+      const outputDir = resolveSafeChildPath(ctx.workspacePath, configPath);
 
       const username = config.getOptionalString('scaffolder.jenkins.username');
       const apiKey = config.getOptionalString('scaffolder.jenkins.key');
@@ -86,7 +88,7 @@ export const jenkinsCreateJobAction = (options: { config: Config }) => {
 
       url = url.concat(`/createItem?name=${jobName}`);
 
-      let readStream = readFileSync(configPath, 'utf8');
+      let readStream = readFileSync(outputDir, 'utf8');
 
       const response = await fetch(url, {
         method: 'POST',
@@ -114,3 +116,4 @@ export const jenkinsCreateJobAction = (options: { config: Config }) => {
     },
   });
 };
+
